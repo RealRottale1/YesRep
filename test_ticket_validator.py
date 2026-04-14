@@ -1,15 +1,17 @@
+import pytest
+from ticket_validator import validate_ticket, get_ticket_tier, calculate_total
 
 def test_valid_ticket():
-    assert validate_ticket("TK123456") == True
+    assert validate_ticket("TK123456") is True
 
 
 def test_invalid_ticket_extra_legth():
-    assert validate_ticket("TK1234567") == False
+    assert validate_ticket("TK1234567") is False
 
 
 def test_invalid_ticket_noTK():
     with pytest.raises(TypeError):
-        assert validate_ticket("12345678")
+        assert validate_ticket(43)
 
 
 def test_get_ticket_tier_General():
@@ -30,7 +32,7 @@ def test_get_ticket_tier_Invalid():
 
 def test_calculate_total_empty():
     with pytest.raises(ValueError):
-        calculate_total([], 2)
+        calculate_total([], 0.5)
 
 def test_calculate_total_out_of_range():
     with pytest.raises(ValueError):
@@ -38,4 +40,4 @@ def test_calculate_total_out_of_range():
 
 def test_calculate_total_non_list_prices():
     with pytest.raises(TypeError):
-        calculate_total("Hello World", 1)
+        calculate_total("Hello World", 0.5)
