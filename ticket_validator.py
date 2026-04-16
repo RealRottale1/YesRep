@@ -34,5 +34,5 @@ def calculate_total(prices, discount=0):
         raise ValueError
     if discount < 0 or discount > 1:
         raise ValueError
-    return round(sum(prices), 2)
+    return round(sum(prices) * (1-discount), 2)
     
